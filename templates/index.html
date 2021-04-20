@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+      <h3 class="text-center text-success">Total Budget</h3>
+      <div class="row">          
+        {% for asset in assets %}
+        <a class="btn col bg-danger m-2 p-2 text-light font-weight-bold" href="{% url 'deleteasset' asset.id %}">{{ asset.purpose}} {{ asset.totalamount}} TK <i class='fas fa-trash-alt text-warning'></i></a>
+        {% endfor %}
+      </div>
+    </div>
+  <div class="container">
+    <h3 class="text-center text-success mt-4">Expense's List</h3>
+    <table class="table">
+        <thead class=" table-dark">
+            <tr>
+                <th>Si</th>
+                <th>Purpose</th>
+                <th>Desc</th>
+                <th>Cost</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key,value in ailables.items %}
+        
+                {% for cost in costs %}
+                
+                    {% if cost.asset.id == key %}
+
+                        <tr>
+                            <td scope="row">{{forloop.counter}}</td>
+                            <td scope="row">{{cost.asset.purpose}}</td>
+                            <td scope="row">{{cost.description}}</td>
+                            <td scope="row">{{cost.amount}}</td>
+                            <td scope="row"> 
+                                <a class="btn" href="{% url 'updatecost' cost.id %}"><i class='fas fa-edit'></i></a>
+                                <a class="btn" href="{% url 'deletecost' cost.id %}"><i class='fas fa-trash-alt'></i></a>
+                            </td>
+                        </tr>
+
+                        {% endif %}
+                {% endfor %}
+
+                
+                    <tr>
+                        <td class="text-right table-success border-danger font-weight-bold" scope="row" colspan="5" >{{ purpose }} Available Taka = {{value}}</td>
+                    </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+        
+    </table>
+  </div>
+  
+    
+{% endblock %}

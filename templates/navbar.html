@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-2">
+    <a class="navbar-brand" href="{% url 'home' %}">Daily Expense Tracker</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'addcost' %}">Add Expense</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'addasset' %}">Add Budget</a>
+        </li>
+        {% endif %}
+        
+      </ul>
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">{{ user.username | upper}} <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">Login <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="{% url 'signup' %}">Register</a>
+        </li>
+        {% endif %}
+        
+      </ul>
+      
+    </div>
+  </nav>

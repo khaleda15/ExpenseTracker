@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Cost
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center text-danger">Are you Sure you want to Delete "{{cost.description}}" Cost: {{cost.amount}}TK</h3> <hr>
+    <div class="row mx-auto">
+        <div class="col-md-6 offset-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="btn btn-success" type="submit" value="Delete Cost">
+                <a  class="btn btn-info" href="{% url 'home' %}">Cancle</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
